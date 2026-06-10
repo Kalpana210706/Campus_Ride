@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     // Login function backend link karne ke liye
     const login = async (email, password) => {
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+            const res = await axios.post('https://campus-ride-ov94.onrender.com/api/auth/login', { email, password });
             setToken(res.data.token);
             setUser(res.data.user);
             return { success: true, role: res.data.user.role };

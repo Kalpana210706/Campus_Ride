@@ -4,7 +4,7 @@
 // import { io } from 'socket.io-client';
 // import CampusMap from '../components/CampusMap';
 
-// const socket = io('http://localhost:5000');
+// const socket = io('https://campus-ride-ov94.onrender.com');
 
 // export default function DriverDashboard() {
 //     const { user, token } = useContext(AuthContext);
@@ -36,7 +36,7 @@
 //         const fetchDriverProfile = async () => {
 //             try {
 //                 const config = { headers: { Authorization: `Bearer ${token}` } };
-//                 const res = await axios.get('http://localhost:5000/api/auth/profile', config);
+//                 const res = await axios.get('https://campus-ride-ov94.onrender.com/api/auth/profile', config);
 //                 if (res.data?.user) {
 //                     const profileRating = res.data.user.ratings || res.data.user.rating || 5.0;
 //                     setAnalytics(prev => ({
@@ -101,7 +101,7 @@
 //         try {
 //             const nextStatus = !isOnline;
 //             const config = { headers: { Authorization: `Bearer ${token}` } };
-//             await axios.put('http://localhost:5000/api/auth/availability', { isOnline: nextStatus }, config);
+//             await axios.put('https://campus-ride-ov94.onrender.com/api/auth/availability', { isOnline: nextStatus }, config);
 //             setIsOnline(nextStatus);
 //         } catch (err) {
 //             alert("Error syncing availability status.");
@@ -251,7 +251,7 @@ import axios from 'axios';
 import { io } from 'socket.io-client';
 import CampusMap from '../components/CampusMap';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://campus-ride-ov94.onrender.com');
 
 export default function DriverDashboard() {
     const { user, token } = useContext(AuthContext);
@@ -276,7 +276,7 @@ export default function DriverDashboard() {
         const fetchDriverData = async () => {
             try {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                const res = await axios.get('http://localhost:5000/api/rides/dashboard/driver', config);
+                const res = await axios.get('https://campus-ride-ov94.onrender.com/api/rides/dashboard/driver', config);
                 if (res.data) {
                     setAnalytics({
                         totalRides: res.data.stats?.totalRidesCompleted || 0,
@@ -334,7 +334,7 @@ export default function DriverDashboard() {
         if (!incomingRequest) return;
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            await axios.put(`http://localhost:5000/api/rides/accept/${incomingRequest.rideId}`, {}, config);
+            await axios.put(`https://campus-ride-ov94.onrender.com/api/rides/accept/${incomingRequest.rideId}`, {}, config);
             
             socket.emit('accept_ride', { name: user?.name || "Driver Operator", vehicleNumber: user?.vehicleNumber || "ER-09" });
             setCurrentRide(incomingRequest);
@@ -358,7 +358,7 @@ export default function DriverDashboard() {
         const targetRideId = currentRide.rideId || currentRide._id;
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            await axios.put(`http://localhost:5000/api/rides/start/${targetRideId}`, {}, config);
+            await axios.put(`https://campus-ride-ov94.onrender.com/api/rides/start/${targetRideId}`, {}, config);
             socket.emit('ride_started_live', targetRideId);
             setRideStage('driving');
         } catch (err) {
@@ -372,7 +372,7 @@ export default function DriverDashboard() {
 
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            await axios.put(`http://localhost:5000/api/rides/complete/${targetRideId}`, {}, config);
+            await axios.put(`https://campus-ride-ov94.onrender.com/api/rides/complete/${targetRideId}`, {}, config);
         } catch (err) {
             console.log("Local cluster state resolution updated.");
         }

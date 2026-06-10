@@ -4,7 +4,7 @@
 // import axios from 'axios';
 // import CampusMap from '../components/CampusMap';
 
-// const socket = io('http://localhost:5000');
+// const socket = io('https://campus-ride-ov94.onrender.com');
 
 // export default function PassengerDashboard() {
 //     const { user, token } = useContext(AuthContext);
@@ -47,7 +47,7 @@
 //         try {
 //             const activeToken = token || localStorage.getItem('token');
 //             const config = { headers: { Authorization: `Bearer ${activeToken}` } };
-//             const res = await axios.post('http://localhost:5000/api/rides/request', { pickup, drop, fare: "₹20" }, config);
+//             const res = await axios.post('https://campus-ride-ov94.onrender.com/api/rides/request', { pickup, drop, fare: "₹20" }, config);
 
 //             setRideStatus('searching');
 //             const requestPayload = {
@@ -83,7 +83,7 @@
 //                 passengerName: user?.name || "Passenger"
 //             };
 
-//             await axios.put(`http://localhost:5000/api/rides/rate/${targetRideId}`, reviewPayload, config).catch(e => console.log('DB log bypassed.'));
+//             await axios.put(`https://campus-ride-ov94.onrender.com/api/rides/rate/${targetRideId}`, reviewPayload, config).catch(e => console.log('DB log bypassed.'));
 
 //             // Core live communication emission event targeting the specific room
 //             socket.emit('update_driver_rating_live', {
@@ -178,7 +178,7 @@ import { io } from 'socket.io-client';
 import axios from 'axios';
 import CampusMap from '../components/CampusMap';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://campus-ride-ov94.onrender.com');
 
 export default function PassengerDashboard() {
     const { user, token } = useContext(AuthContext);
@@ -252,7 +252,7 @@ export default function PassengerDashboard() {
                 fare: 20
             };
 
-            const res = await axios.post('http://localhost:5000/api/rides/request', payload, config);
+            const res = await axios.post('https://campus-ride-ov94.onrender.com/api/rides/request', payload, config);
             const serverSavedRideId = res.data?.ride?._id;
             setActiveRideId(serverSavedRideId);
 
@@ -274,7 +274,7 @@ export default function PassengerDashboard() {
         if (!activeRideId) return;
         try {
             const config = { headers: { Authorization: `Bearer ${token || localStorage.getItem('token')}` } };
-            await axios.put(`http://localhost:5000/api/rides/cancel/${activeRideId}`, {}, config);
+            await axios.put(`https://campus-ride-ov94.onrender.com/api/rides/cancel/${activeRideId}`, {}, config);
             socket.emit('ride_cancelled_live', activeRideId);
             setRideStatus('idle');
             setActiveRideId(null);
@@ -294,7 +294,7 @@ export default function PassengerDashboard() {
             const config = { headers: { Authorization: `Bearer ${token || localStorage.getItem('token')}` } };
             const reviewBody = { rating: givenRating, feedback: writtenFeedback || "Smooth campus journey loop." };
 
-            await axios.put(`http://localhost:5000/api/rides/rate/${activeRideId}`, reviewBody, config);
+            await axios.put(`https://campus-ride-ov94.onrender.com/api/rides/rate/${activeRideId}`, reviewBody, config);
 
             if (associatedDriverId) {
                 socket.emit('update_driver_rating_live', {

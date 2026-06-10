@@ -69,7 +69,7 @@ export default function Login() {
                     })
                 };
 
-                const res = await axios.post('http://localhost:5000/api/auth/register', payload);
+                const res = await axios.post('https://campus-ride-ov94.onrender.com/api/auth/register', payload);
                 setMessage(res.data.message || "Registered successfully! Logging you in...");
                 
                 // Auto login immediate execution
