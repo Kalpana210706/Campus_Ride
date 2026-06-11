@@ -235,7 +235,7 @@ All mandatory requirements specified in the challenge statement have been succes
 
 ### Frontend
 
-Add your deployed frontend URL here:
+
 
 ```text
 https://campus-ride-one.vercel.app
@@ -243,7 +243,7 @@ https://campus-ride-one.vercel.app
 
 ### Backend
 
-Add your deployed backend URL here:
+
 
 ```text
 https://campus-ride-ov94.onrender.com
